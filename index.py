@@ -10,8 +10,8 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 # from api.others import function_map, mount_student_api
-import api.others
-
+import others
+from others import function_map
 
 # --- Load environment variables
 load_dotenv()
@@ -21,7 +21,7 @@ API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 # --- Create FastAPI app
 app = FastAPI()
 
-api.others.main_app = app  # Register main app reference
+others.main_app = app  # Register main app reference
 
 # --- Enable CORS (optional for frontend communication)
 app.add_middleware(
@@ -33,7 +33,7 @@ app.add_middleware(
 )
 
 # --- Import your function map (✅ Correct this line)
-from api.others import function_map  # ✅ not api.data — it's in others.py
+from others import function_map  # ✅ not api.data — it's in others.py
 
 # --- Load TF-IDF vectorizer
 with open("api/data/vectorizer.pkl", "rb") as f:
